@@ -30,7 +30,7 @@ module.exports = {
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No such user exists" })
-          : Thought.findOneAndUpdate(
+          : Thought.findAllAndRemove(
               { users: req.params.userId },
               { $pull: { users: req.params.userId } },
               { new: true }
