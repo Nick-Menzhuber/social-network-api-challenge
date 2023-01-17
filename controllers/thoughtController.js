@@ -16,4 +16,17 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
+  newThought(req, res) {
+    Thought.create(req.body)
+      .then((thought) => res.json(thought))
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  },
+  deleteThought(req, res) {
+    Thought.findOneAndDelete({ _id: req.params.thoughtId })
+      .then(() => res.json({ message: "Thought deleted successfully!" }))
+      .catch((err) => res.status(500).json(err));
+  },
 };
